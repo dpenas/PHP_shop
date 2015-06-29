@@ -5,7 +5,7 @@ include_once("config.php");
 
 $return_url = base64_decode($_POST["return_url"]);
 
-if(isset($_POST["type"]) && $_POST["type"]=='discount') {
+if(isset($_POST["type"]) && $_POST["type"] == 'discount') {
 
 	$discountCode = filter_var($_POST["discount"], FILTER_SANITIZE_STRING);
 	$result = $mysqli->query("SELECT value FROM discount WHERE code='$discountCode' AND NOW() BETWEEN startDate AND endDate LIMIT 1");

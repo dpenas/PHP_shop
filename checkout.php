@@ -11,40 +11,35 @@
 	</head>
 	<body>
 		<div id="products-wrapper">
-			<div class="view-cart">
+			<div class="cart">
 			 	<?php
 				if(isset($_SESSION["products"])){
 				    $total = 0;
-					echo '<ul>';
-					$cart_items = 0;
-					foreach ($_SESSION["products"] as $cart_itm) {
-			           $product_id = $cart_itm["id"];
-					   $results = $mysqli->query("SELECT id, product_name,product_desc, price FROM product WHERE id = '$product_id' LIMIT 1");
+					$itemCount = 0;
+					foreach ($_SESSION["products"] as $item) {
+			           $id = $item["id"];
+					   $results = $mysqli->query("SELECT id, name, descr, price FROM product WHERE id = '$id' LIMIT 1");
 					   $obj = $results->fetch_object();
 					   
-					    echo '<li class="cart-itm">';
-						echo '<span class="remove-itm"><a href="cart_update.php?removep='.$cart_itm["code"].'&return_url='.$current_url.'">&times;</a></span>';
-						echo '<div class="p-price">'.$currency.$obj->price.'</div>';
+						echo '<span class="float-right"><a href="cart_update.php?prodDelete='.$item["id"].'&return_url='.$current_url.'">&times;</a></span>';
+						echo '<div class="price">'.$currency.$obj->price.'</div>';
 			            echo '<div class="product-info">';
-						echo '<h3>'.$obj->product_name.'</h3> ';
-			            echo '<div class="p-qty">Quantity : '.$cart_itm["qty"].'</div>';
-			            echo '<div>'.$obj->product_desc.'</div>';
+						echo '<h3>'.$obj->name.'</h3> ';
+			            echo '<div class="p-quantity">Quantity : '.$item["quantity"].'</div>';
+			            echo '<div>'.$obj->descr.'</div>';
 						echo '</div>';
-			            echo '</li>';
-						$subtotal = ($cart_itm["price"]*$cart_itm["qty"]);
+						$subtotal = ($item["price"] * $item["quantity"]);
 						$total = ($total + $subtotal);
 						if ($_SESSION["discount"]) {
 							$total = $total * (1 - (0.01 * $_SESSION["discount"]));
 						}
 
-						echo '<input type="hidden" name="item_name['.$cart_items.']" value="'.$obj->product_name.'" />';
-						echo '<input type="hidden" name="item_code['.$cart_items.']" value="'.$product_code.'" />';
-						echo '<input type="hidden" name="item_desc['.$cart_items.']" value="'.$obj->product_desc.'" />';
-						echo '<input type="hidden" name="item_qty['.$cart_items.']" value="'.$cart_itm["qty"].'" />';
-						$cart_items ++;
+						echo '<input type="hidden" name="item_name['.$itemCount.']" value="'.$obj->name.'" />';
+						echo '<input type="hidden" name="item_descr['.$itemCount.']" value="'.$obj->descr.'" />';
+						echo '<input type="hidden" name="item_quantity['.$itemCount.']" value="'.$item["quantity"].'" />';
+						$itemCount++;
 						
 			        }
-			    	echo '</ul>';
 			    	echo '<form method="post" action="apply_discount.php">';
 			    	echo '<label> Discount code: </label> <input type="text" name="discount">';
 			    	echo '<span><button>OK</button></span>';

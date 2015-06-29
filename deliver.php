@@ -22,7 +22,7 @@ if(isset($_POST["type"]) && $_POST["type"]=='checkout') {
 
 	foreach($_SESSION["products"] as $product) {
 		$mysqli->query("INSERT INTO productOrder (productID, prodOrderID, quantity) 
-			VALUES ('" . $product["id"] . "', '" . $prodOrderID . "', '" . $product["qty"] . "')");
+			VALUES ('" . $product["id"] . "', '" . $prodOrderID . "', '" . $product["quantity"] . "')");
 	}
 	session_destroy();
 	echo '<div style="color: #444;  margin: 0;  padding-left: 30%;  font-size: 51px;  line-height: 44px;  letter-spacing: -2px;  font-weight: bold;"> Your order has been sent</div>';

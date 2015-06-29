@@ -26,100 +26,65 @@
 	float:left;
 	margin-right: 10px;
 }
+
 .product {
 	margin-bottom: 10px;
-	height: 100px;
-	background: #F0F0F0;
-	padding: 10px;
-	border: 1px solid #DDD;
+	height: 110px;
+	border: 2px solid #EEE;
 	border-radius: 5px;
-	box-shadow: 2px 2px 2px #F8F8F8;
 	
 }
-.product .product-thumb {
-	float: left;
-	height: 100px;
-	width: 100px;
-	margin-right: 10px;
-}
-.product .product-content{
+
+.product .product-content {
 	text-align: center;
 }
+
 .product .product-content h3 {
-	font-size: 18px;
 	margin: 0px;
-	padding: 0px;
-	color: #707070;
+	color: #3498db;
 }
 
 .shopping-cart{
-	width: 30%;
+	width: 25%;
 	float:left;
-	background: #F0F0F0;
-	padding: 10px;	
-	border: 1px solid #DDD;
-	border-radius: 5px;
+	padding: 10px;
+	border: 1px solid #EEE;
 
 }
+
 .shopping-cart h2 {
-	background: #E2E2E2;
-	padding: 4px;
-	font-size: 14px;
-	margin: -10px -10px 5px;
-	color: #707070;
+	padding: 3px;
+	font-size: 13px;
+	margin: -10px 75px 5px;
 }
 
-.shopping-cart h3,.view-cart h3 {
-	font-size: 12px;
-	margin: 0px;
-	padding: 0px;
-}
-.shopping-cart ol{
-	padding: 1px 0px 0px 15px;
-}
-.shopping-cart .cart-itm, .view-cart .cart-itm{
-	border-bottom: 1px solid #DDD;
-	font-size: 11px;
-	font-family: arial;
-	margin-bottom: 5px;
-	padding-bottom: 5px;
-}
-.shopping-cart .remove-itm, .view-cart .remove-itm{
-	font-size: 14px;
+.float-right{
 	float: right;
-	background: #D5D5D5;
-	padding: 4px;
-	line-height: 8px;
-	border-radius: 3px;
-}
-.shopping-cart .remove-itm:hover, .view-cart .remove-itm:hover{
-	background: #C4C4C4;
-}
-.shopping-cart .remove-itm a, .view-cart .remove-itm a{
-	color: #888;
-	text-shadow: 1px 1px 1px #ECECEC;
-	text-decoration:none;
 }
 
 .check-out-txt{
 	float:right;
 }
 
-.view-cart{
+.cart{
 	width: 100%;
 	float:left;
-	background: #F0F0F0;
-	padding: 10px;	
-	border: 1px solid #DDD;
+	border: 2px solid #EEE;
 	border-radius: 5px;
 }
-.view-cart .p-price{
+
+.cart .price{
 	float: right;
 	margin-right: 10px;
-	font-size: 12px;
 	font-weight: bold;
 }
-.view-cart .product-info{width:60%;}
+.cart .product-info{
+	width: 70%;
+}
+
+.product-info h3 {
+	color: #3498db;
+}
 
 .btn {
 	background: #3498db;

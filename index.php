@@ -27,13 +27,13 @@ function limitWords($word) {
                 while($product = $products->fetch_object()) {
         			echo '<div class="product">';
                     echo '<form method="post" action="cart_update.php">';
-                    echo '<div class="product-content"><h3>'.$product->product_name.'</h3>';
-                    echo '<div align="center">'.limitWords($product->product_desc).'</div>';
-        			echo '<div id="price">Price: ' . $product->price . $currency . '</div>';
-                    echo '<div id="quantity">Quantity: <input type="text" name="product_qty" value="1" size="3" /></div>';
+                    echo '<div class="product-content"><h3>'.$product->name.'</h3>';
+                    echo '<div align="center">'.limitWords($product->descr).'</div>';
+        			echo '<div id="price">price: ' . $product->price . $currency . '</div>';
+                    echo '<div id="quantity">Quantity: <input type="text" name="quantity" value="1" size="3" /></div>';
         			echo '<div id="buyButton" class="margin-top-small"><button class="btn add-to-cart">Buy</button></div>';
         			echo '</div>';
-                    echo '<input type="hidden" name="product_id" value="'.$product->id.'" />';
+                    echo '<input type="hidden" name="id" value="'.$product->id.'" />';
                     echo '<input type="hidden" name="type" value="add" />';
         			echo '<input type="hidden" name="return_url" value="'.$current_url.'" />';
                     echo '</form>';
@@ -45,20 +45,18 @@ function limitWords($word) {
             </div>
             
             <div class="shopping-cart">
-                <h2>Your Shopping Cart</h2>
+                <h2>Shopping Cart</h2>
 
                 <?php
                 if(isset($_SESSION["products"])) {
                     $total = 0;
                     foreach ($_SESSION["products"] as $item) {
-                        echo '<li class="cart-itm">';
-                        echo '<span class="remove-itm"><a href="cart_update.php?removep='.$item["id"].'&return_url='.$current_url.'">&times;</a></span>';
+                        echo '<span class="float-right"><a href="cart_update.php?prodDelete='.$item["id"].'&return_url='.$current_url.'">&times;</a></span>';
                         echo '<h3>'.$item["name"].'</h3>';
-                        echo '<div class="p-qty">Quantity: '.$item["qty"].'</div>';
-                        echo '<div class="p-price">Price: '.$currency.$item["price"].'</div>';
-                        echo '</li>';
-                        $subtotal = ($item["price"]*$item["qty"]);
-                        $total = ($total + $subtotal);
+                        echo '<div class="p-quantity">Quantity: '.$item["quantity"].'</div>';
+                        echo '<div class="price">price: '.$currency.$item["price"].'</div>';
+                        $itemprice = ($item["price"] * $item["quantity"]);
+                        $total = ($total + $itemprice);
                     }
                     echo '<span class="check-out-txt"><strong>Total : '.$currency.$total.'</strong> <a href="checkout.php">Checkout</a></span>';
                 	echo '<span class="empty-cart"><a href="cart_update.php?emptycart=1&return_url='.$current_url.'">Delete cart</a></span>';
