@@ -33,7 +33,7 @@ function limitWords($word) {
                     echo '<div id="quantity">Quantity: <input type="text" name="product_qty" value="1" size="3" /></div>';
         			echo '<div id="buyButton" class="margin-top-small"><button class="btn add-to-cart">Buy</button></div>';
         			echo '</div>';
-                    echo '<input type="hidden" name="product_code" value="'.$product->product_code.'" />';
+                    echo '<input type="hidden" name="product_id" value="'.$product->id.'" />';
                     echo '<input type="hidden" name="type" value="add" />';
         			echo '<input type="hidden" name="return_url" value="'.$current_url.'" />';
                     echo '</form>';
@@ -48,19 +48,16 @@ function limitWords($word) {
                 <h2>Your Shopping Cart</h2>
 
                 <?php
-                if(isset($_SESSION["products"]))
-                {
+                if(isset($_SESSION["products"])) {
                     $total = 0;
-                    foreach ($_SESSION["products"] as $cart_itm)
-                    {
+                    foreach ($_SESSION["products"] as $item) {
                         echo '<li class="cart-itm">';
-                        echo '<span class="remove-itm"><a href="cart_update.php?removep='.$cart_itm["code"].'&return_url='.$current_url.'">&times;</a></span>';
-                        echo '<h3>'.$cart_itm["name"].'</h3>';
-                        echo '<div class="p-code">Code: '.$cart_itm["code"].'</div>';
-                        echo '<div class="p-qty">Quantity: '.$cart_itm["qty"].'</div>';
-                        echo '<div class="p-price">Price: '.$currency.$cart_itm["price"].'</div>';
+                        echo '<span class="remove-itm"><a href="cart_update.php?removep='.$item["id"].'&return_url='.$current_url.'">&times;</a></span>';
+                        echo '<h3>'.$item["name"].'</h3>';
+                        echo '<div class="p-qty">Quantity: '.$item["qty"].'</div>';
+                        echo '<div class="p-price">Price: '.$currency.$item["price"].'</div>';
                         echo '</li>';
-                        $subtotal = ($cart_itm["price"]*$cart_itm["qty"]);
+                        $subtotal = ($item["price"]*$item["qty"]);
                         $total = ($total + $subtotal);
                     }
                     echo '<span class="check-out-txt"><strong>Total : '.$currency.$total.'</strong> <a href="checkout.php">Checkout</a></span>';

@@ -17,10 +17,9 @@
 				    $total = 0;
 					echo '<ul>';
 					$cart_items = 0;
-					foreach ($_SESSION["products"] as $cart_itm)
-			        {
-			           $product_code = $cart_itm["code"];
-					   $results = $mysqli->query("SELECT product_name,product_desc, price FROM product WHERE product_code='$product_code' LIMIT 1");
+					foreach ($_SESSION["products"] as $cart_itm) {
+			           $product_id = $cart_itm["id"];
+					   $results = $mysqli->query("SELECT id, product_name,product_desc, price FROM product WHERE id = '$product_id' LIMIT 1");
 					   $obj = $results->fetch_object();
 					   
 					    echo '<li class="cart-itm">';
